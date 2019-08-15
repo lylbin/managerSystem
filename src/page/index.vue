@@ -1,5 +1,5 @@
 <template>
-<div class=''>user</div>
+    <div class=''>This is 首页</div>
 </template>
 
 <script>

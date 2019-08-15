@@ -1,35 +1,29 @@
 <template>
-    <!-- <el-header style="text-align: right; font-size: 12px">
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>王小虎</span>
-    </el-header> -->
-    <el-col :span="24" class="header">
-			<el-col :span="4" width=200px class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{collapsed?'':sysName}}
-			</el-col>
-			<el-col :span="10">
-				<div class="tools" @click.prevent="collapse">
-					<i class="fa fa-align-justify"></i>
-				</div>
-			</el-col>
-			<el-col :span="4" class="userinfo">
-				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item>设置</el-dropdown-item>
-						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>
-			</el-col>
-		</el-col>
+    <el-header>
+       <div :class="isCollapse ? 'logo min-logo':'logo' " style="float:left;height:60px;">
+          <img src="@/assets/logo.png" alt="logo">
+          <span>后台管理系统</span>
+        </div>
+      <el-radio-group v-model="isCollapse" style="">
+        <el-radio-button :label="false">展开</el-radio-button>
+        <el-radio-button :label="true">收起</el-radio-button>
+      </el-radio-group>
+      <!-- <i class="el-icon-s-fold"  v-if="!isCollapse"></i> -->
+
+      <div class="userInfo">
+          <span>{{username}}</span>
+          <el-dropdown>
+              <i class="el-icon-setting" style="margin-right: 15px"></i>
+              <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>个人信息</el-dropdown-item>
+              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+          </el-dropdown>
+          
+      </div>
+  </el-header>
+
 </template>
 
 <script>
@@ -42,19 +36,19 @@ export default {
     data() {
     //这里存放数据
         return {
-            defaultActiveIndex: "0",
-            nickname: '管理员',
-            collapsed: false,
-            sysName:'VUEADMIN',
-			collapsed:false,
-            sysUserName: '',
-            sysUserAvatar: '',
+            username:"陌雨成画",
+            isCollapse:false,
+            changeBarDirection:false
         };
     },
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      isCollapse(val,oldval){
+        this.$emit('collapseFun',this.isCollapse)
+      }
+    },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
 
@@ -65,20 +59,39 @@ export default {
     },
     //方法集合
     methods: {
-
+        
     },
 }
 </script>
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
-.header{
-    width:100%;
-    padding: 0;
-    z-index: 2;
-    height:60px;
-    background-color: #545c64;
-    color: #fff;
-    text-align: center;
-    line-height: 60px;
+.userInfo{
+  float:right;
+  margin-right:20px;
 }
+.logo{
+  width:200px;
+  transition:width 0.5s linear;
+  img{
+    height:60px;
+    vertical-align: middle;
+  }
+  span{
+    vertical-align: middle;
+  }
+}
+.min-logo{
+  width:60px;
+  transition:width 0.3s;
+}
+.el-header {
+    width:100%;
+    height:60px;
+    padding:0;
+    margin:0;
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+    text-align:left;
+  }
 </style>
