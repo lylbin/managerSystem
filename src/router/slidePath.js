@@ -1,4 +1,4 @@
-import Home from '@/page/Home'
+import Home from '@/components/layout/home'
 import contentMain from '@/components/layout/contentMain'
 import index from '@/page/index'
 
@@ -10,21 +10,22 @@ import dataStatistical from '@/page/statistical/dataStatistical'
 import scoreStatistical from '@/page/statistical/scoreStatistical'
 
 export default [
-        // {
-        //   path: '/',
-        //   name: 'index',
-        //   component: index,
-        //   meta: {
-        //       title: '首页',
-        //       icon: ' ',
-        //   },
-        // },
+          {
+            path: '/',
+            name: 'index',
+            component: index,
+            meta: {
+                title: '系统首页',
+                icon: 'el-icon-s-home',
+            },
+            noDropdown:true,
+          },
           {
             path:'/user',
             name:'user',
             meta:{
               title:'用户信息',
-              icon:'el-icon-user'
+              icon:'el-icon-user-solid'
             },
             component: contentMain,
             children:[

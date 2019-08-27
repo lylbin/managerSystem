@@ -1,10 +1,14 @@
 <template>
     <div class="home">
-        <my-header @collapseFun="handelCollapse"></my-header>
+        <my-header></my-header>
         <el-container>
             <my-slide :isCollapse="isCollapse"></my-slide>
             <el-main>
-               <el-breadcrumb class="breadcrumb" separator="/">
+                <div class='bread_container' id="bread_container">
+                <span @click="handleLefeMenu" class="bars"> 
+                    <i :class="isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold' "></i>
+                </span>
+                <el-breadcrumb class="breadcrumb" separator="/">
                     <el-breadcrumb-item 
                         v-for='(title,index) in matchedArr'
                         :key='index'
@@ -12,6 +16,8 @@
                         {{title}}
                     </el-breadcrumb-item>
                 </el-breadcrumb>
+                </div>
+
                 <contentMain></contentMain>  
             </el-main>
         </el-container>
@@ -35,15 +41,11 @@ export default {
         },
        
     data() {
-      const item = {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      };
+     
       return {
         router:slide,
         isCollapse:false,
-        tableData: Array(20).fill(item)
+        
       }
   },
   computed:{
@@ -66,31 +68,25 @@ export default {
   mounted(){
   },
   methods:{
-
-      handelCollapse(val){
-          this.isCollapse=val;
-      }
+      handleLefeMenu(){
+		    this.$store.dispatch('setLeftCollapse');  // 折叠菜单
+			this.$store.dispatch('handleLeftMenu');  // 改变菜单宽度 180->35/35-180
+            this.isCollapse=!this.isCollapse;
+		},
+      
   }
 }
 </script>
 <style lang='scss' scoped>
-.home{
-    height:100%;
-    width:100%;
-    padding:0;
-    margin:0;
-}
-
-.el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-  
-  .el-aside {
-    color: #333;
-  }
-  .breadcrumb{
+	.bread_container{
+		background-color: #eaebec;
+		width: 100%;
+		.bars{
+			float: left;
+            margin: 4px 10px;
+			cursor: pointer;
+		}
+		.breadcrumb{
 			height: 30px;
 			line-height: 30px;
 			.breadbutton{
@@ -99,10 +95,18 @@ export default {
 				
 			}
 		}
+	}
+.home{
+    height:100%;
+    width:100%;
+    padding:0;
+    margin:0;
+}
 </style>
 <style lang='scss'>
 .el-container{
     height:100%;
+    width:100%;
 }
 .el-menu{
     height:100%;

@@ -1,13 +1,13 @@
 <template>
     <el-header>
-       <div :class="isCollapse ? 'logo min-logo':'logo' " style="float:left;height:60px;">
+       <div :class="isCollapse ? 'logo min-logo':'logo' " style="float:left">
           <img src="@/assets/logo.png" alt="logo">
           <span>后台管理系统</span>
         </div>
-      <el-radio-group v-model="isCollapse" style="">
+      <!-- <el-radio-group v-model="isCollapse" style="">
         <el-radio-button :label="false">展开</el-radio-button>
         <el-radio-button :label="true">收起</el-radio-button>
-      </el-radio-group>
+      </el-radio-group> -->
       <!-- <i class="el-icon-s-fold"  v-if="!isCollapse"></i> -->
 
       <div class="userInfo">
@@ -15,9 +15,9 @@
           <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>个人信息</el-dropdown-item>
-              <el-dropdown-item>修改密码</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item @click.native="toUserinfo">个人信息</el-dropdown-item>
+              <el-dropdown-item @click.native="toChangePwd">修改密码</el-dropdown-item>
+              <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
               </el-dropdown-menu>
           </el-dropdown>
           
@@ -37,6 +37,7 @@ export default {
     //这里存放数据
         return {
             username:"陌雨成画",
+            
             isCollapse:false,
             changeBarDirection:false
         };
@@ -45,9 +46,7 @@ export default {
     computed: {},
     //监控data中的数据变化
     watch: {
-      isCollapse(val,oldval){
-        this.$emit('collapseFun',this.isCollapse)
-      }
+      
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
@@ -59,7 +58,15 @@ export default {
     },
     //方法集合
     methods: {
-        
+        toUserinfo(){
+          this.$router.push('../user/userinfo')
+        },
+        toChangePwd(){
+          this.$router.push('../user/changePwd')
+        },
+        loginOut(){
+          this.$router.push('../login')
+        }
     },
 }
 </script>
@@ -91,7 +98,7 @@ export default {
     margin:0;
     background-color: #B3C0D1;
     color: #333;
-    line-height: 60px;
+    line-height: 59px;
     text-align:left;
   }
 </style>

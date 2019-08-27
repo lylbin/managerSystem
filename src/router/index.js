@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Home from '@/page/Home'
+import Home from '@/components/layout/home'
 import contentMain from '@/components/layout/contentMain'
 import index from '@/page/index'
 import slidePath from './slidePath.js'
+import login from '@/page/login'
 Vue.use(Router)
 
 export default new Router({
@@ -14,6 +15,12 @@ export default new Router({
       name: 'Home',
       component: Home,
       children:slidePath
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
+    }
       // children: [
       //   {
       //     path: '/',
@@ -109,6 +116,5 @@ export default new Router({
       //   ] 
       //   }
       //],
-  }
   ]  
 })
