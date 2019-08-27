@@ -2,21 +2,9 @@
     <div class="home">
         <my-header></my-header>
         <el-container>
-            <my-slide :isCollapse="isCollapse"></my-slide>
+            <my-slide></my-slide>
             <el-main>
-                <div class='bread_container' id="bread_container">
-                    <span @click="handleLefeMenu" class="bars"> 
-                        <i :class="isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold' "></i>
-                    </span>
-                    <el-breadcrumb class="breadcrumb" separator="/">
-                        <el-breadcrumb-item 
-                            v-for='(title,index) in matchedArr'
-                            :key='index'
-                            >
-                            {{title}}
-                        </el-breadcrumb-item>
-                    </el-breadcrumb>
-                </div>
+                <bread></bread>
 
                 <contentMain></contentMain>  
             </el-main>
@@ -31,73 +19,38 @@
 import myHeader from '@/components/layout/header'
 import mySlide from '@/components/layout/slide'
 import contentMain from '@/components/layout/contentMain'
+import bread from '@/components/layout/bread'
 import slide from '@/router/slidePath.js'
+
 export default {
         //import引入的组件需要注入到对象中才能使用
         components: {
             myHeader,
             mySlide,
-            contentMain
+            contentMain,
+            bread
         },
        
     data() {
      
       return {
-        router:slide,
-        isCollapse:false,
+        
+        
         
       }
   },
   computed:{
-      matchedArr(){
-			let temp = [],temps = [];
-			this.$route.matched.filter((item,index,self) => {
-				if(item.meta.title){
-					const title = item.meta.title;
-				    temp.push(title);
-				}
-			});
-			temp.filter((item,index,self) => {
-				if(!temps.includes(item)){
-					temps.push(item);
-				}
-			})
-			return temps;
-		}
+     
   },
   mounted(){
   },
   methods:{
-      handleLefeMenu(){
-		    this.$store.dispatch('setLeftCollapse');  // 折叠菜单
-			this.$store.dispatch('handleLeftMenu');  // 改变菜单宽度 180->35/35-180
-            this.isCollapse=!this.isCollapse;
-		},
       
   }
 }
 </script>
 <style lang='scss' scoped>
-	.bread_container{
-		background-color: #eaebec;
-		width: 100%;
-        display:flex;
-        align-items:center;
-		.bars{
-			float: left;
-            margin: 0px 10px;
-			cursor: pointer;
-		}
-		.breadcrumb{
-			height: 30px;
-			line-height: 30px;
-			.breadbutton{
-				float:left;
-				margin:4px 5px 0 0;
-				
-			}
-		}
-	}
+	
 .home{
     height:100%;
     width:100%;

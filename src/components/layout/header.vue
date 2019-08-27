@@ -1,28 +1,20 @@
 <template>
     <el-header>
-       <div :class="isCollapse ? 'logo min-logo':'logo' " style="float:left">
+      <div :class="isCollapse ? 'logo min-logo':'logo' " style="float:left">
           <img src="@/assets/logo.png" alt="logo">
           <span>后台管理系统</span>
-        </div>
-      <!-- <el-radio-group v-model="isCollapse" style="">
-        <el-radio-button :label="false">展开</el-radio-button>
-        <el-radio-button :label="true">收起</el-radio-button>
-      </el-radio-group> -->
-      <!-- <i class="el-icon-s-fold"  v-if="!isCollapse"></i> -->
+      </div>
 
       <div class="userInfo">
-         
           <div class="user-avator"><img src="../../assets/user.jpg"></div>
           <el-dropdown>
-              <!-- <i class="el-icon-setting" style="margin-right: 15px"></i> -->
               <span style="margin-left: 15px;color:#fff">{{username}}</span>
               <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="toUserinfo">个人信息</el-dropdown-item>
-              <el-dropdown-item @click.native="toChangePwd">修改密码</el-dropdown-item>
-              <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
+                  <el-dropdown-item @click.native="toUserinfo">个人信息</el-dropdown-item>
+                  <el-dropdown-item @click.native="toChangePwd">修改密码</el-dropdown-item>
+                  <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
               </el-dropdown-menu>
           </el-dropdown>
-          
       </div>
   </el-header>
 
