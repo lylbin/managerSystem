@@ -5,17 +5,17 @@
             <my-slide :isCollapse="isCollapse"></my-slide>
             <el-main>
                 <div class='bread_container' id="bread_container">
-                <span @click="handleLefeMenu" class="bars"> 
-                    <i :class="isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold' "></i>
-                </span>
-                <el-breadcrumb class="breadcrumb" separator="/">
-                    <el-breadcrumb-item 
-                        v-for='(title,index) in matchedArr'
-                        :key='index'
-                        >
-                        {{title}}
-                    </el-breadcrumb-item>
-                </el-breadcrumb>
+                    <span @click="handleLefeMenu" class="bars"> 
+                        <i :class="isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold' "></i>
+                    </span>
+                    <el-breadcrumb class="breadcrumb" separator="/">
+                        <el-breadcrumb-item 
+                            v-for='(title,index) in matchedArr'
+                            :key='index'
+                            >
+                            {{title}}
+                        </el-breadcrumb-item>
+                    </el-breadcrumb>
                 </div>
 
                 <contentMain></contentMain>  
@@ -81,9 +81,11 @@ export default {
 	.bread_container{
 		background-color: #eaebec;
 		width: 100%;
+        display:flex;
+        align-items:center;
 		.bars{
 			float: left;
-            margin: 4px 10px;
+            margin: 0px 10px;
 			cursor: pointer;
 		}
 		.breadcrumb{
@@ -108,8 +110,5 @@ export default {
     height:100%;
     width:100%;
 }
-.el-menu{
-    height:100%;
-    background-color:rgb(121, 212, 255);
-  }
+
 </style>

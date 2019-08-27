@@ -8,7 +8,7 @@
               <i :class="item.meta.icon"></i>
               <span>{{item.meta.title}}</span>  
           </el-menu-item>          
-          
+
           <el-submenu v-if="!item.noDropdown" v-for="(item,index) in Routers" :key="index" :index="item.path">
             <template slot="title">
               <i :class="item.meta.icon"></i>
@@ -72,10 +72,19 @@ export default {
 
 </style>
 <style lang='scss'>
-.el-submenu__title{
+.el-submenu__title,.el-menu-item{
   padding:0;
+  color:#fff;
 }
+.el-menu{
+    height:100%;
+    background-color:#061f3e;
+    color:#fff;
+  }
 .el-submenu .el-menu-item{
   padding:0;
+}
+.el-submenu__title:hover,.el-menu-item:hover{
+  background: #4169E1;
 }
 </style>

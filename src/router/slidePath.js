@@ -36,8 +36,8 @@ export default [
                     title: '个人信息',
                     icon: 'el-icon-user',
                 },
-                component:userinfo
-                // component: () => import('@/page/user/userinfo'), 
+                //component:userinfo
+                component: () => import('@/page/user/userinfo'), 
               },{
                 path: 'changePwd',
                 name:'changePwd',
@@ -45,8 +45,8 @@ export default [
                     title: '修改密码',
                     icon: 'el-icon-user',                    
                 },
-                component:changePwd
-                //component: () => import('@/page/user/changePwd'), 
+                //component:changePwd
+                component: () => import('@/page/user/changePwd'), 
               },
             ]
           },
@@ -68,8 +68,8 @@ export default [
                   title: '商品信息',
                   icon: 'el-icon-menu', 
               },
-              component:goodsMessage
-              //component: () => import('@/page/goodsManager/goodsMessage'), 
+              //component:goodsMessage
+              component: () => import('@/page/goodsManager/goodsMessage'), 
             },{
               path: 'orderMessage',
               name:'orderMessage',
@@ -77,8 +77,8 @@ export default [
                   title: '订单信息',
                   icon: 'el-icon-menu',  
               },
-              component:orderMessage
-              //component: () => import('@/page/goodsManager/orderMessage'), 
+              //component:orderMessage
+              component: () => import('@/page/goodsManager/orderMessage'), 
             }
           ]
         },
@@ -100,8 +100,8 @@ export default [
                   icon: ' ',
                   
               },
-              component:dataStatistical
-              //component: () => import('@/page/statistical/dataStatistical'), 
+              //component:dataStatistical
+              component: () => import('@/page/statistical/dataStatistical'), 
             },{
               path: 'scoreStatistical',
               name: 'scoreStatistical',
@@ -110,8 +110,8 @@ export default [
                   icon: ' ',
                   
               },
-              component:scoreStatistical
-              //component: () => import('@/page/statistical/scoreStatistical'), 
+              //component:scoreStatistical
+              component: () => import('@/page/statistical/scoreStatistical'), 
             },
         ] 
         }

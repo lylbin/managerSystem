@@ -11,9 +11,11 @@
       <!-- <i class="el-icon-s-fold"  v-if="!isCollapse"></i> -->
 
       <div class="userInfo">
-          <span>{{username}}</span>
+         
+          <div class="user-avator"><img src="../../assets/user.jpg"></div>
           <el-dropdown>
-              <i class="el-icon-setting" style="margin-right: 15px"></i>
+              <!-- <i class="el-icon-setting" style="margin-right: 15px"></i> -->
+              <span style="margin-left: 15px;color:#fff">{{username}}</span>
               <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="toUserinfo">个人信息</el-dropdown-item>
               <el-dropdown-item @click.native="toChangePwd">修改密码</el-dropdown-item>
@@ -74,7 +76,10 @@ export default {
 //@import url(); 引入公共css类
 .userInfo{
   float:right;
-  margin-right:20px;
+  width:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .logo{
   width:200px;
@@ -91,13 +96,22 @@ export default {
   width:60px;
   transition:width 0.3s;
 }
+.user-avator{
+        margin-left: 20px;
+    }
+    .user-avator img{
+        display: block;
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+    }
 .el-header {
     width:100%;
     height:60px;
     padding:0;
     margin:0;
-    background-color: #B3C0D1;
-    color: #333;
+    background-color: #061f3e;
+    color: #fff;
     line-height: 59px;
     text-align:left;
   }
