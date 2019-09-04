@@ -6,7 +6,8 @@
             <el-main>
                 <bread></bread>
 
-                <contentMain></contentMain>  
+                <content-main></content-main>  
+                <!-- <router-view></router-view> -->
             </el-main>
         </el-container>
 </div>
@@ -57,11 +58,17 @@ export default {
     padding:0;
     margin:0;
 }
-</style>
-<style lang='scss'>
-.el-container{
+/deep/.el-container{
     height:100%;
     width:100%;
 }
-
+.el-main{
+    overflow:hidden;
+}
+.contentMain{
+   height:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#F0F0F0;
+}
 </style>

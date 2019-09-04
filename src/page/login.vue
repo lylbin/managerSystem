@@ -16,7 +16,13 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <div class="tiparea">
+                    <p class="wxtip">温馨提示：</p>
+                    <p class="tip">用户名为：admin
+                        <!-- /editor<span class="tips">(可用于切换权限)</span> -->
+                    </p>
+                    <p class="tip">密码为：123456</p>
+                </div>
             </el-form>
         </div>
     </div>
@@ -56,7 +62,7 @@
     }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
     .login-wrap{
         position: relative;
         width:100%;
@@ -93,9 +99,16 @@
         height:36px;
         margin-bottom: 10px;
     }
-    .login-tips{
-        font-size:12px;
-        line-height:30px;
-        color:#fff;
-    }
+    .tiparea{
+		text-align:left;
+		font-size: 12px;
+		color: #4cbb15;
+		padding: 10px 0;
+		.tip{
+			margin-left: 54px;
+		}
+		.tips{
+			color:red;
+		}
+	}
 </style>

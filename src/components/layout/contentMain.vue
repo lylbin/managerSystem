@@ -1,5 +1,5 @@
 <template>
-    <div class=''>
+    <div class='contentMain'>
         <router-view></router-view>
     </div>
 </template>
@@ -37,5 +37,7 @@ methods: {
 </script>
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
-
+.contentMain{
+    height:100%;
+}
 </style>
