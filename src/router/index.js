@@ -11,17 +11,18 @@ Vue.use(Router)
 
 //默认不需要权限的页面
 export const constantRouterMap = [
-  {
+   {
     path: '/',
+    name: 'login',
+    component: login,
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
     children:slidePath
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: login,
-  }
+ 
 ]
 export default new Router({
   routes: constantRouterMap

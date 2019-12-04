@@ -7,7 +7,9 @@ import store from './store'
 import ElementUI from 'element-ui';
 import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css';
+import VueParticles from 'vue-particles'
 
+Vue.use(VueParticles)
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(ElementUI);

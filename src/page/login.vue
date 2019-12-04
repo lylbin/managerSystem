@@ -1,5 +1,23 @@
 <template>
     <div class="login-wrap">
+        <vue-particles
+        color="#dedede"
+        :particleOpacity="0.7"
+        :particlesNumber="80"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="3"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+      >
+      </vue-particles>
         <div class="ms-login">
             <div class="ms-title">后台管理系统</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
@@ -25,6 +43,7 @@
                 </div>
             </el-form>
         </div>
+        
     </div>
 </template>
 
@@ -51,7 +70,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                        this.$router.push('/home');
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -67,7 +86,7 @@
         position: relative;
         width:100%;
         height:100%;
-        background: url(../assets/login-bg.jpg) no-repeat;
+        background: url(../assets/background.jpg) no-repeat;
         background-size: cover;
     }
     .ms-title{
