@@ -1,5 +1,8 @@
 <template>
-    <div class=''>This is 首页</div>
+    <div class=''>This is 首页
+        <button type="button" class="layui-btn" @click="conso">一个标准的按钮</button>
+        <i class="layui-icon layui-icon-face-smile"></i>
+    </div>
 </template>
 
 <script>
@@ -25,12 +28,27 @@ created() {
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+     
 },
 //方法集合
 methods: {
-
-},
+    conso(){
+        //layer.msg('这是首页'); 
+        layer.confirm('这是首页，测试layui', {
+            btn: ['按钮一', '按钮二', '按钮三'] //可以无限个按钮
+            ,btn3: function(index, layero){
+                //按钮【按钮三】的回调
+                layer.msg('按钮3')
+            }
+            }, function(index, layero){
+            //按钮【按钮一】的回调
+                layer.msg('按钮1')
+            }, function(index){
+            //按钮【按钮二】的回调
+                layer.msg('按钮2')
+            });
+                }
+        },
 }
 </script>
 <style lang='scss' scoped>
