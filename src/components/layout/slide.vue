@@ -68,23 +68,26 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-
-
-</style>
-<style lang='scss'>
-.el-submenu__title,.el-menu-item{
+/deep/ .el-submenu__title,.el-menu-item{
   padding:0;
   color:#fff;
 }
-.el-menu{
+/deep/ .el-menu{
     height:100%;
     background-color:#061f3e;
     color:#fff;
   }
-.el-submenu .el-menu-item{
+/deep/ .el-menu-item{
   padding:0;
 }
-.el-submenu__title:hover,.el-menu-item:hover{
+/deep/ .el-menu-item.is-active{
+  color:#409EFF
+}
+/deep/ .el-menu--collapse{
+  width:54px;
+}
+/deep/ .el-submenu__title:hover,.el-menu-item:hover{
   background: #4169E1;
 }
+
 </style>

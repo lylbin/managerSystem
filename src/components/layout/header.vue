@@ -69,6 +69,7 @@ export default {
 .userInfo{
   float:right;
   width:200px;
+  line-height:60px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -104,7 +105,6 @@ export default {
     margin:0;
     background-color: #061f3e;
     color: #fff;
-    line-height: 59px;
     text-align:left;
   }
 </style>
