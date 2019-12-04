@@ -14,7 +14,9 @@
               <i :class="item.meta.icon"></i>
               <span>{{item.meta.title}}</span>
             </template>
-              <el-menu-item v-for="(citem,cindex) in item.children" :key="cindex" :index="citem.name" :route="citem">{{citem.meta.title}}</el-menu-item>          
+              <el-menu-item v-for="(citem,cindex) in item.children" :key="cindex" :index="citem.name" :route="citem">
+                <i :class="citem.meta.icon"></i>
+                {{citem.meta.title}}</el-menu-item>          
           </el-submenu>   
         
       </el-menu>

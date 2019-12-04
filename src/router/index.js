@@ -65,7 +65,7 @@ export const asyncRouterMap = [
         name:'userinfo',
         meta: {
             title: '个人信息',
-            icon: 'el-icon-user',
+            icon: 'el-icon-user-solid',
         },
         //component:userinfo
         component: () => import('@/page/user/userinfo'), 
@@ -74,7 +74,7 @@ export const asyncRouterMap = [
         name:'changePwd',
         meta: {
             title: '修改密码',
-            icon: 'el-icon-user',                    
+            icon: 'el-icon-user-solid',                    
         },
         //component:changePwd
         component: () => import('@/page/user/changePwd'), 
@@ -128,7 +128,7 @@ export const asyncRouterMap = [
       name:'dataStatistical',
       meta: {
           title: '数据统计',
-          icon: ' ',
+          icon: 'el-icon-s-data',
           
       },
       //component:dataStatistical
@@ -138,7 +138,7 @@ export const asyncRouterMap = [
       name: 'scoreStatistical',
       meta: {
           title: '得分统计',
-          icon: ' ',
+          icon: 'el-icon-s-data',
           
       },
       //component:scoreStatistical

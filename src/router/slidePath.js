@@ -34,7 +34,7 @@ export default [
                 name:'userinfo',
                 meta: {
                     title: '个人信息',
-                    icon: 'el-icon-user',
+                    icon: 'el-icon-user-solid',
                 },
                 //component:userinfo
                 component: () => import('@/page/user/userinfo'), 
@@ -43,7 +43,7 @@ export default [
                 name:'changePwd',
                 meta: {
                     title: '修改密码',
-                    icon: 'el-icon-user',                    
+                    icon: 'el-icon-user-solid',                    
                 },
                 //component:changePwd
                 component: () => import('@/page/user/changePwd'), 
@@ -97,7 +97,7 @@ export default [
               name:'dataStatistical',
               meta: {
                   title: '数据统计',
-                  icon: ' ',
+                  icon: 'el-icon-s-data',
                   
               },
               //component:dataStatistical
@@ -107,7 +107,7 @@ export default [
               name: 'scoreStatistical',
               meta: {
                   title: '得分统计',
-                  icon: ' ',
+                  icon: 'el-icon-s-data',
                   
               },
               //component:scoreStatistical
