@@ -1,13 +1,5 @@
-import Home from '@/components/layout/home'
 import contentMain from '@/components/layout/contentMain'
 import index from '@/page/index'
-
-import userinfo from '@/page/user/userinfo'
-import changePwd from '@/page/user/changePwd'
-import goodsMessage from '@/page/goodsManager/goodsMessage'
-import orderMessage from '@/page/goodsManager/orderMessage'
-import dataStatistical from '@/page/statistical/dataStatistical'
-import scoreStatistical from '@/page/statistical/scoreStatistical'
 
 export default [
           {
@@ -34,7 +26,7 @@ export default [
                 name:'userinfo',
                 meta: {
                     title: '个人信息',
-                    icon: 'el-icon-user-solid',
+                    icon: 'el-icon-s-custom',
                 },
                 //component:userinfo
                 component: () => import('@/page/user/userinfo'), 
@@ -43,7 +35,7 @@ export default [
                 name:'changePwd',
                 meta: {
                     title: '修改密码',
-                    icon: 'el-icon-user-solid',                    
+                    icon: 'el-icon-unlock',                    
                 },
                 //component:changePwd
                 component: () => import('@/page/user/changePwd'), 
@@ -56,7 +48,7 @@ export default [
             name: 'goodsManager',
             component:  contentMain,
             meta: {
-                title: '商品管理',
+                title: '球员管理',
                 icon: 'el-icon-menu',
             },
         
@@ -65,8 +57,8 @@ export default [
               path: 'goodsMessage',
               name:'goodsMessage',
               meta: {
-                  title: '商品信息',
-                  icon: 'el-icon-menu', 
+                  title: '球员信息',
+                  icon: 'el-icon-goods', 
               },
               //component:goodsMessage
               component: () => import('@/page/goodsManager/goodsMessage'), 
@@ -74,8 +66,8 @@ export default [
               path: 'orderMessage',
               name:'orderMessage',
               meta: {
-                  title: '订单信息',
-                  icon: 'el-icon-menu',  
+                  title: '球员动态',
+                  icon: 'el-icon-s-order',  
               },
               //component:orderMessage
               component: () => import('@/page/goodsManager/orderMessage'), 
@@ -89,7 +81,7 @@ export default [
           component:  contentMain,
           meta: {
               title: '统计报表',
-              icon: 'el-icon-s-data',
+              icon: 'el-icon-pie-chart',
           },
           children: [
             {
@@ -107,7 +99,7 @@ export default [
               name: 'scoreStatistical',
               meta: {
                   title: '得分统计',
-                  icon: 'el-icon-s-data',
+                  icon: 'el-icon-data-analysis',
                   
               },
               //component:scoreStatistical

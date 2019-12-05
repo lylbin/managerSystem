@@ -4,19 +4,22 @@
        
       <el-menu id="menuClass" router :collapse="isCollapse" @open="handleOpen" @close="handleClose">
         
-          <el-menu-item v-if="item.noDropdown" v-for="(item,index) in Routers" :key="index" :index="item.name" :route="item">
+          <el-menu-item v-for="(item,index) in noDropdownRouters" :key="'noDropdownRouter-'+index" :index="item.name" :route="item">
+            
               <i :class="item.meta.icon"></i>
-              <span>{{item.meta.title}}</span>  
+              <span >{{item.meta.title}}</span>  
           </el-menu-item>          
 
-          <el-submenu v-if="!item.noDropdown" v-for="(item,index) in Routers" :key="index" :index="item.path">
+          <el-submenu v-for="(item,index) in dropdownRouters" :key="index" :index="item.path" >
+            <div ></div>
             <template slot="title">
               <i :class="item.meta.icon"></i>
               <span>{{item.meta.title}}</span>
             </template>
               <el-menu-item v-for="(citem,cindex) in item.children" :key="cindex" :index="citem.name" :route="citem">
                 <i :class="citem.meta.icon"></i>
-                {{citem.meta.title}}</el-menu-item>          
+                <span>{{citem.meta.title}}</span>
+              </el-menu-item>          
           </el-submenu>   
         
       </el-menu>
@@ -41,6 +44,16 @@ export default {
         },
         //监听属性 类似于data概念
         computed: {
+          noDropdownRouters: function () {
+            return this.Routers.filter(function (Routers) {
+              return Routers.noDropdown
+            })
+          },
+          dropdownRouters: function () {
+            return this.Routers.filter(function (Routers) {
+              return !Routers.noDropdown
+            })
+          },
           ...mapGetters([
             //'permission_routers',
             'isCollapse',
@@ -91,5 +104,4 @@ export default {
 /deep/ .el-submenu__title:hover,.el-menu-item:hover{
   background: #4169E1;
 }
-
 </style>

@@ -38,6 +38,7 @@ methods: {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .contentMain{
-    height:100%;
+    height:80%;
+    overflow: auto;
 }
 </style>

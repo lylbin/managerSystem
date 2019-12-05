@@ -23,19 +23,20 @@
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column label="日期" width="120">
-        <template slot-scope="scope">{{ scope.row.date }}</template>
+        <template slot-scope="scope">{{ scope.row.effectiveTime }}</template>
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="120"></el-table-column>
         <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
     </el-table> -->
 
-    <el-table :data="tableData" highlight-current-row v-loading="listLoading" @selection-change="handleSelectionChange" style="width: 100%;">
+    <el-table :data="showTableData" highlight-current-row v-loading="listLoading" border height="350px" @selection-change="handleSelectionChange" style="width: 100%;">
 			<el-table-column type="selection" width="55"></el-table-column>
-			<el-table-column prop="name" label="姓名" width="120" sortable></el-table-column>
+			<el-table-column prop="name" label="姓名" width="180" sortable show-overflow-tooltip></el-table-column>
+      <el-table-column prop="nickname" label="昵称" width="150" sortable></el-table-column>
 			<el-table-column prop="age" label="年龄" width="100" sortable></el-table-column>
-			<el-table-column prop="date" label="生日" width="120" sortable></el-table-column>
-			<el-table-column prop="address" label="地址" width="150" sortable show-overflow-tooltip></el-table-column>
-			<el-table-column label="操作" width="">
+			<el-table-column prop="address" label="球队" width="" sortable show-overflow-tooltip></el-table-column>
+      <el-table-column prop="effectiveTime" label="效力时间" width="110" sortable></el-table-column>
+			<el-table-column label="操作" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -50,28 +51,28 @@
             :page-sizes="[10, 20, 50, 100]"
             :page-size="pagesize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="totalCount">
+            :total="this.tableData.length">
         </el-pagination>
         <!--编辑界面-->
-        <el-dialog title="编辑" :visible.sync="editFormVisible">
-			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.date"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.address"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="editFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
-			</div>
+      <el-dialog :title="titleMap[dialogStatus]" :visible.sync="editFormVisible" class="editdialog" @close="resetForm('editForm')">
+        <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="editForm.name" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="年龄" prop="age">
+            <el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
+          </el-form-item>
+          <el-form-item label="效力时间" prop="effectiveTime">
+            <el-input placeholder="选择日期" v-model="editForm.effectiveTime"></el-input>
+          </el-form-item>
+          <el-form-item label="地址" prop="address">
+            <el-input type="textarea" v-model="editForm.address" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click.native="editFormVisible = false">取消</el-button>
+          <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        </div>
 		</el-dialog>
 </div>
     
@@ -88,6 +89,12 @@ components: {},
 data() {
 //这里存放数据
 return {
+    titleMap: {
+        addEquipment:'新增',
+        editEquipment: '编辑'
+    },
+    //新增和编辑弹框标题
+    dialogStatus: "",
     filters: {
         name: ''
     },
@@ -97,71 +104,92 @@ return {
     editFormRules: {
         name: [
             { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        age: [
+            { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        effectiveTime: [
+            { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        address: [
+            { required: true, message: '请输入姓名', trigger: 'blur' }
         ]
     },
     tableData: [{
-          date: '2016-05-03',
-          name: '科比',
+          effectiveTime: '20',
+          name: '科比·布莱恩特',
+          nickname:'小飞侠',
           age:'38',
           address: '洛杉矶湖人'
         }, {
-          date: '2016-05-02',
-          name: '詹姆斯',
+          effectiveTime: '10',
+          name: '勒布朗·詹姆斯',
+          nickname:'小皇帝',
           age:'34',
           address: '克利夫兰骑士'
         }, {
-          date: '2016-05-04',
-          name: '韦德',
+          effectiveTime: '13',
+          name: '德怀恩·韦德',
+          nickname:'闪电侠',
           age:'36',
           address: '迈阿密热火'
         }, {
-          date: '2016-05-01',
-          name: '乔丹',
+          effectiveTime: '12',
+          name: '迈克尔·乔丹',
+          nickname:'上帝',
           age:'55',
           address: '芝加哥公牛'
         }, {
-          date: '2016-05-08',
+          effectiveTime: '10',
           name: '易建联',
+          nickname:'易帝',
           age:'35',
-          address: '中国广州'
+          address: '广东宏建'
         }, {
-          date: '2016-05-06',
+          effectiveTime: '1',
           name: '林书豪',
+          nickname:'林疯狂',
           age:'31',
           address: '北京首钢'
         }, {
-          date: '2016-05-07',
+          effectiveTime: '9',
           name: '姚明',
+          nickname:'小巨人',
           age:'38',
-          address: '上海'
+          address: '休斯顿火箭'
+        }, {
+          effectiveTime: '10',
+          name: '斯蒂芬·库里',
+          nickname:'神射手',
+          age:'31',
+          address: '金州勇士'
+        }, {
+          effectiveTime: '8',
+          name: '卡哇伊·莱昂纳德',
+          nickname:'机器人',
+          age:'28',
+          address: '洛杉矶快船'
+        }, {
+          effectiveTime: '6',
+          name: '扬尼斯·阿德托昆博',
+          nickname:'字母歌',
+          age:'25',
+          address: '雄鹿'
         },{
-          date: '2016-05-06',
-          name: '林书豪',
-          age:'31',
-          address: '北京首钢'
-        }, {
-          date: '2016-05-07',
-          name: '姚明',
-          age:'38',
-          address: '上海'
-        },{
-          date: '2016-05-06',
-          name: '林书豪',
-          age:'31',
-          address: '北京首钢'
-        }, {
-          date: '2016-05-07',
-          name: '姚明',
-          age:'38',
-          address: '上海'
-        },],
+          effectiveTime: '8',
+          name: '詹姆斯·哈登',
+          nickname:'大胡子',
+          age:'28',
+          address: '休斯顿火箭'
+        },
+    ],
         multipleSelection: [],
         editForm: {
             id: 0,
             name: '',
             //sex: -1,
             age: 0,
-            date: '',
+            effectiveTime: '',
             address: ''
         },
         currentPage:1,
@@ -171,7 +199,13 @@ return {
 };
 },
 //监听属性 类似于data概念
-computed: {},
+computed: {
+     showTableData() {
+      return (this.tableData||[]).slice((this.currentPage - 1) * this.pagesize,
+            this.currentPage * this.pagesize
+      );
+    }
+},
 //监控data中的数据变化
 watch: {},
 //生命周期 - 创建完成（可以访问当前this实例）
@@ -189,7 +223,7 @@ methods: {
     },
     handleCurrentChange(val) {
         this.currentPage = val;
-        
+       
     },
      handleSelectionChange(val) {
         this.multipleSelection = val;
@@ -198,16 +232,28 @@ methods: {
           console.log('getusers')
       },
       handleAdd(){
-          console.log('handleAdd')
+        let _this=this
+        
+        _this.editFormVisible = true;
+        _this.dialogStatus = "addEquipment";
+        
       },
       handleDel(){
           console.log('handleDel')
       },
      handleEdit: function (index, row) {
-         
-        this.editFormVisible = true;
-        console.log(this.editFormVisible,111)
-        this.editForm = Object.assign({}, row);
+        let _this=this
+        _this.editFormVisible = true;
+        _this.dialogStatus = "editEquipment"
+        //console.log(this.editFormVisible,111)
+        this.$nextTick(() => {
+          _this.editForm = Object.assign({}, row);
+        })
+    },
+    resetForm(formName){
+      
+      this.$refs[formName].resetFields(); 
+    
     },
     editSubmit(){
         console.log('editSubmit')
@@ -236,5 +282,13 @@ methods: {
 }
 .el-table::before{
     content:none;
+}
+.editdialog{
+  .el-input{
+      width:300px;
+  }
+  .el-textarea{
+      width:300px;
+  }
 }
 </style>

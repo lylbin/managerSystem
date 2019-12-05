@@ -39,10 +39,6 @@ export default {
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted(){
-        // this.drawLine();
-        // window.addEventListener('resize',()=>{
-        //     myChart.resize()
-        // })
 
          this.$nextTick(function() {
             
@@ -73,42 +69,33 @@ export default {
             this.chart = this.$echarts.init(document.getElementById(id),'macarons')
             // 绘制图表
             this.chart.setOption({
-                title: { text: '在Vue中使用echarts' },
+                title: { text: '总冠军数排行' },
                 tooltip: {},
                 xAxis: {
-                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                    data: ["湖人","凯尔特人","公牛","勇士","马刺","热火"]
                 },
                 yAxis: {},
                 series: [{
-                    name: '销量',
+                    name: '总冠军数',
                     type: 'bar',
-                    data: [5, 20, 36, 10, 10, 20]
+                    data: [17, 16, 6, 6, 5, 3],
+                    itemStyle: {
+						normal: {
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: '#666',
+                                    fontSize: 16
+                                }
+                            }
+                        }
+                    }
                 }]
             });
            
         },
-        // drawbar(id){
-        //     if ( this.chart_bar &&  this.chart_bar.dispose) { 
-        //         this.chart_bar.dispose(); 
-        //     } 
-        //     // 基于准备好的dom，初始化echarts实例
-        //     this.chart_bar = this.$echarts.init(document.getElementById(id),'macarons')
-        //     // 绘制图表
-        //     this.chart_bar.setOption({
-        //         title: { text: '在Vue中使用echarts' },
-        //         tooltip: {},
-        //         xAxis: {
-        //             data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        //         },
-        //         yAxis: {},
-        //         series: [{
-        //             name: '销量',
-        //             type: 'bar',
-        //             data: [5, 20, 36, 10, 10, 20]
-        //         }]
-        //     });
-           
-        // }
+   
     },
 }
 </script>

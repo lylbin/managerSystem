@@ -1,7 +1,122 @@
 <template>
-    <div class=''>This is 首页
-        <button type="button" class="layui-btn" @click="conso">一个标准的按钮</button>
-        <i class="layui-icon layui-icon-face-smile"></i>
+    <div class=''>
+        <h1>这是首页，测试layui</h1>
+        
+        <div class="layui-tab layui-tab-card">
+            <ul class="layui-tab-title">
+                <li class="layui-this">轮播</li>
+                <li>动画</li>
+                <li>按钮/弹出层</li>
+                <li>form表单</li>
+                <li>订单管理</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 100%;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-carousel" id="test1">
+                        <div carousel-item>
+                            <div><img src="/static/imgs/Lavender.jpg"></div>
+                            <div><img src="/static/imgs/starry-sky.jpg"></div>
+                            <div><img src="/static/imgs/starry-sky2.jpg"></div>
+                            <div><img src="/static/imgs/starry-sky3.jpg"></div>
+                            <div><img src="/static/imgs/starry-sky4.png"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-tab-item">
+                    <div class="animbox">
+                        <div class="layui-anim layui-anim-rotate"><span>旋转360度</span></div>
+                    </div>
+                     <div class="animbox">
+                        <div class="layui-anim layui-anim-fadein"><span>渐现</span></div>
+                    </div>
+                     <div class="animbox">
+                        <div class="layui-anim layui-anim-scaleSpring"><span>弹簧式放大</span></div>
+                    </div>
+                    
+                    <div class="animbox">
+                        <div class="layui-anim layui-anim-rotate layui-anim-loop"><span>循环动画</span></div>
+                    </div>    
+                </div>
+
+                <div class="layui-tab-item">
+                    <button type="button" class="layui-btn" @click="conso">一个标准的按钮</button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-normal" @click="baidabtn">百搭按钮</button>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" @click="smbtn">小型警告</button>
+                    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm" @click="minibtn">迷你暖色</button>
+                </div>
+
+                <div class="layui-tab-item">
+                    <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">输入框</label>
+                        <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码框</label>
+                        <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">辅助文字</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择框</label>
+                        <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
+                            <option value=""></option>
+                            <option value="0">北京</option>
+                            <option value="1">上海</option>
+                            <option value="2">广州</option>
+                            <option value="3">深圳</option>
+                            <option value="4">杭州</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">复选框</label>
+                        <div class="layui-input-block">
+                        <input type="checkbox" name="like[write]" title="写作">
+                        <input type="checkbox" name="like[read]" title="阅读" checked>
+                        <input type="checkbox" name="like[dai]" title="发呆">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开关</label>
+                        <div class="layui-input-block">
+                        <input type="checkbox" name="switch" lay-skin="switch">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单选框</label>
+                        <div class="layui-input-block">
+                        <input type="radio" name="sex" value="男" title="男">
+                        <input type="radio" name="sex" value="女" title="女" checked>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文本域</label>
+                        <div class="layui-input-block">
+                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="layui-tab-item">5</div>
+
+                <div class="layui-tab-item">6</div>
+            </div>
+        </div>
+       
+
     </div>
 </template>
 
@@ -28,14 +143,29 @@ created() {
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-     
+  //form表单 监听提交
+  layui.form.render();
+  layui.form.on('submit(formDemo)', function(data){
+        layer.msg(JSON.stringify(data.field));
+        return false;
+    });
+  
+
+  //轮播  建造实例
+  layui.carousel.render({
+    elem: '#test1'
+    ,width: '100%' //设置容器宽度
+    ,arrow: 'always' //始终显示箭头
+    //,anim: 'updown' //切换动画方式
+  });
 },
 //方法集合
 methods: {
     conso(){
         //layer.msg('这是首页'); 
-        layer.confirm('这是首页，测试layui', {
-            btn: ['按钮一', '按钮二', '按钮三'] //可以无限个按钮
+        layer.confirm('这是首页，测试layui',{
+            anim: 1
+            ,btn: ['按钮一', '按钮二', '按钮三'] //可以无限个按钮
             ,btn3: function(index, layero){
                 //按钮【按钮三】的回调
                 layer.msg('按钮3')
@@ -47,11 +177,49 @@ methods: {
             //按钮【按钮二】的回调
                 layer.msg('按钮2')
             });
-                }
-        },
+    },
+    baidabtn(){
+        layer.msg('不开心。。', {icon: 5,anim: 3});
+    },
+    smbtn(){
+        layer.open({
+            title: '小型警告'
+            ,content: '可以填写任意的layer代码'
+            ,anim:6
+        });
+    },
+    minibtn(){
+        layer.tab({
+            anim:2,
+            area: ['600px', '300px'],
+            tab: [{
+                title: 'TAB1', 
+                content: '内容1'
+            }, {
+                title: 'TAB2', 
+                content: '内容2'
+            }, {
+                title: 'TAB3', 
+                content: '内容3'
+            }]
+        });   
+    }
+    },
 }
 </script>
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
-
+.animbox{
+    display:inline-block;
+    width:100px;
+    height:100px;
+    background:lightblue;
+    border-radius:50%;
+    text-align:center;
+    line-height:100px
+}
+img{
+    width:100%;
+    height:100%;
+}
 </style>
