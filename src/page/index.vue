@@ -1,6 +1,6 @@
 <template>
     <div class=''>
-        <h1>这是首页，测试layui</h1>
+        <h1>这是首页，测试layui(但是不推荐vue里使用layui)</h1>
         
         <div class="layui-tab layui-tab-card">
             <ul class="layui-tab-title">
@@ -8,9 +8,10 @@
                 <li>动画</li>
                 <li>按钮/弹出层</li>
                 <li>form表单</li>
-                <li>订单管理</li>
+                <li>流加载</li>
+                <li>导航</li>
             </ul>
-            <div class="layui-tab-content" style="height: 100%;">
+            <div class="layui-tab-content" style="height:350px;overflow:auto">
                 <div class="layui-tab-item layui-show">
                     <div class="layui-carousel" id="test1">
                         <div carousel-item>
@@ -110,9 +111,67 @@
                     </form>
                 </div>
 
-                <div class="layui-tab-item">5</div>
+                <div class="layui-tab-item">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>信息流 - 手工加载</legend>
+                    </fieldset>
+                    <ul class="flow-default" style="height: 300px;" id="LAY_demo2"></ul>
+                </div>
 
-                <div class="layui-tab-item">6</div>
+                <div class="layui-tab-item">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend>水平导航菜单</legend>
+                    </fieldset>
+                        
+                    <ul class="layui-nav">
+                        <li class="layui-nav-item"><a href="">最新活动</a></li>
+                        <li class="layui-nav-item layui-this">
+                            <a href="javascript:;">产品</a>
+                            <dl class="layui-nav-child">
+                            <dd><a href="">选项1</a></dd>
+                            <dd><a href="">选项2</a></dd>
+                            <dd><a href="">选项3</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="">大数据</a></li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">解决方案</a>
+                            <dl class="layui-nav-child">
+                            <dd><a href="">移动模块</a></dd>
+                            <dd><a href="">后台模版</a></dd>
+                            <dd class="layui-this"><a href="">选中项</a></dd>
+                            <dd><a href="">电商平台</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="">社区</a></li>
+                    </ul>
+
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend>垂直导航菜单</legend>
+                    </fieldset>
+                    
+                    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a href="javascript:;">默认展开</a>
+                            <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">选项一</a></dd>
+                            <dd><a href="javascript:;">选项二</a></dd>
+                            <dd><a href="javascript:;">选项三</a></dd>
+                            <dd><a href="">跳转项</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">解决方案</a>
+                            <dl class="layui-nav-child">
+                            <dd><a href="">移动模块</a></dd>
+                            <dd><a href="">后台模版</a></dd>
+                            <dd><a href="">电商平台</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="">云市场</a></li>
+                        <li class="layui-nav-item"><a href="">社区</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
        
@@ -158,6 +217,34 @@ mounted() {
     ,arrow: 'always' //始终显示箭头
     //,anim: 'updown' //切换动画方式
   });
+
+  
+  layui.element.render();
+  //监听导航点击
+  layui.element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+
+  
+  layui.flow.load({
+    elem: '#LAY_demo2' //流加载容器
+    ,scrollElem: '#LAY_demo2' //滚动条所在元素，一般不用填，此处只是演示需要。
+    ,isAuto: false
+    ,isLazyimg: true
+    ,done: function(page, next){ //加载下一页
+      //模拟插入
+      setTimeout(function(){
+        var lis = [];
+        for(var i = 0; i < 6; i++){
+          lis.push('<li><img src="/static/imgs/liuupload.jpg?v='+ ( (page-1)*6 + i + 1 ) +'"></li>')
+        }
+        next(lis.join(''), page < 6); //假设总页数为 6
+      }, 500);
+    }
+  });
+  
+
 },
 //方法集合
 methods: {
@@ -221,5 +308,17 @@ methods: {
 img{
     width:100%;
     height:100%;
+}
+/deep/ .layui-form-selectup dl{
+    top:0;
+    bottom:auto;
+}
+/deep/ .flow-default li{
+    display:inline-block;
+    width:48%;
+    margin:0 5px 10px 0;
+    img{
+        width:100%;
+    }
 }
 </style>
