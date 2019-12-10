@@ -1,7 +1,7 @@
 <template>
     <div class=''>
-        <h1>这是首页，测试layui(但是不推荐vue里使用layui)</h1>
-        
+        <h1>这是首页，测试layui</h1>
+        <span>(但不推荐vue和layui一起使用。因为layui是底层dom操作，基于jQuery，但是Vue.js并不推荐直接进行底层dom操作)</span>
         <div class="layui-tab layui-tab-card">
             <ul class="layui-tab-title">
                 <li class="layui-this">轮播</li>
@@ -11,7 +11,7 @@
                 <li>流加载</li>
                 <li>导航</li>
             </ul>
-            <div class="layui-tab-content" style="height:350px;overflow:auto">
+            <div class="layui-tab-content" style="height:333px;overflow:auto">
                 <div class="layui-tab-item layui-show">
                     <div class="layui-carousel" id="test1">
                         <div carousel-item>

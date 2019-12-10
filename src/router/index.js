@@ -11,8 +11,14 @@ Vue.use(Router)
 
 //默认不需要权限的页面
 export const constantRouterMap = [
-   {
+  {
     path: '/',
+    name: 'login',
+    component: login,
+    redirect:'/login'
+  },
+  {
+    path: '/login',
     name: 'login',
     component: login,
   },
@@ -112,7 +118,7 @@ export const asyncRouterMap = [
       component: () => import('@/page/goodsManager/orderMessage'), 
     }
   ]
-},
+  },
 
 {
   path: '/statistical',
@@ -144,6 +150,6 @@ export const asyncRouterMap = [
       //component:scoreStatistical
       component: () => import('@/page/statistical/scoreStatistical'), 
     },
-] 
+  ] 
 }
 ]
