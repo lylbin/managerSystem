@@ -11,7 +11,7 @@
                 <li>流加载</li>
                 <li>导航</li>
             </ul>
-            <div class="layui-tab-content" style="height:333px;overflow:auto">
+            <div class="layui-tab-content" :style="{height:newHeight,'overflow':'auto'}">
                 <div class="layui-tab-item layui-show">
                     <div class="layui-carousel" id="test1">
                         <div carousel-item>
