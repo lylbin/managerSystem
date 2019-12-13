@@ -2,9 +2,9 @@
     <div class="orderMessage">
         <h2>基本的vuex计数应用</h2>
         <span style="line-height:50px">count:{{ count }}</span>
-        <p>
-            <el-button @click="increment">+</el-button>
+        <p>   
             <el-button @click="decrement">-</el-button>
+            <el-button @click="increment">+</el-button>
         </p>
     </div>
 </template>
